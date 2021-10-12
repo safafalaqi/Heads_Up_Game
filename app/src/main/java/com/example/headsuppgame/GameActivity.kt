@@ -7,19 +7,24 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.*
 import androidx.core.view.isVisible
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.URL
 
 
 class GameActivity : AppCompatActivity() {
     lateinit var celebrities:Celebrities
-    lateinit var celebritiesUnique:Celebrities
     lateinit var celebrity:CelebritiesItem
 
     var counter=0
     var startGame=false
-    var isSetTime=false
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +94,7 @@ class GameActivity : AppCompatActivity() {
             }.start()
     }}
 
-
+    //for filtering non sense data I used Api for name checking
     fun createApiInterface() {
         val apiInterface = APIClient().getClient()?.create(APIInterface::class.java)
         val call: Call<Celebrities?>? = apiInterface!!.getUsersInfo()
@@ -107,4 +112,5 @@ class GameActivity : AppCompatActivity() {
             }
         })
     }
- }
+
+}
