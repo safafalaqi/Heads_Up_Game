@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bg"
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etName"
@@ -46,36 +49,39 @@
             android:hint="Taboo3"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btDelCelActiv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="5"
+                android:text="Delete Celebrity"
+                android:textColor="#9F7474"
                 app:cornerRadius="20dp"
                 app:strokeColor="#FFFFFF"
-                android:textColor="#9F7474"
-                android:shadowDy="4"
-                android:shadowDx="4"
-                app:strokeWidth="2dp"
-                android:shadowRadius="5"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btUpCelActiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Delete Celebrity" />
-        <Button
-            android:id="@+id/btUpCelActiv"
-            android:layout_width="match_parent"
-            app:cornerRadius="20dp"
-            app:strokeColor="#FFFFFF"
-            app:strokeWidth="2dp"
-            android:textColor="#9F7474"
-            android:shadowDy="4"
-            android:shadowDx="4"
-            android:shadowRadius="5"
-            android:layout_margin="10dp"
-            android:layout_height="wrap_content"
-            android:text="Update Celebrity" />
+                android:shadowDx="4"
+                android:shadowDy="4"
+                android:shadowRadius="5"
+                android:text="Update Celebrity"
+                android:textColor="#9F7474"
+                app:cornerRadius="20dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="2dp" />
 
         </LinearLayout>
 

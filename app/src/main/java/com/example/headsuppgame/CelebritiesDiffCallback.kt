@@ -1,4 +1,4 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil

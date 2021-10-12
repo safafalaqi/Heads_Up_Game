@@ -1,4 +1,4 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
@@ -30,6 +30,7 @@ class UpdateDeleteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_delete)
 
+        getSupportActionBar()?.setTitle("Update and delete Celebrity")
         name=findViewById(R.id.etName)
         taboo1=findViewById(R.id.etTaboo1UD)
         taboo2=findViewById(R.id.etTaboo2UD)
@@ -57,7 +58,7 @@ class UpdateDeleteActivity : AppCompatActivity() {
         }
 
         back.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, EditActivity::class.java)
             startActivity(intent)
         }
     }

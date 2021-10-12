@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     tools:context=".AddActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etNameAddActiv"
@@ -51,14 +54,14 @@
             android:id="@+id/btAddCelActiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="5"
+            android:text="Add Celebrity"
+            android:textColor="#9F7474"
             app:cornerRadius="20dp"
             app:strokeColor="#FFFFFF"
-            android:textColor="#9F7474"
-            android:shadowDy="4"
-            android:shadowDx="4"
-            app:strokeWidth="2dp"
-            android:shadowRadius="5"
-            android:text="Add Celebrity" />
+            app:strokeWidth="2dp" />
 
     </LinearLayout>
 

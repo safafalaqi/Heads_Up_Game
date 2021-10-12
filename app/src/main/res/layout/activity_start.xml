@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".StartActivity">
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
+        android:id="@+id/gifImageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_light" />
 
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -22,9 +21,9 @@
         android:shadowDx="4"
         android:shadowDy="4"
         android:shadowRadius="1"
+        android:text="Heads Up!"
         android:textColor="#9F7474"
         android:textSize="60dp"
-        android:text="Heads Up!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -32,49 +31,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.222" />
 
-    <LinearLayout
-        android:id="@+id/lloptions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/btStartGame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            app:cornerRadius="20dp"
-            android:textSize="20dp"
-            app:strokeColor="#FFFFFF"
-            app:strokeWidth="2dp"
-            android:shadowRadius="5"
-            android:textColor="#9F7474"
-            android:shadowDy="4"
-            android:shadowDx="4"
-            android:text="Start the game" />
-
-        <Button
-            android:id="@+id/btEditCel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cornerRadius="20dp"
-            android:textSize="20dp"
-            app:strokeColor="#FFFFFF"
-            app:strokeWidth="2dp"
-            android:shadowRadius="5"
-            android:textColor="#9F7474"
-            android:shadowDy="4"
-            android:shadowDx="4"
-            android:text="Edit Celebrities list" />
-    </LinearLayout>
-
-
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imgDance"
         android:layout_width="239dp"
         android:layout_height="257dp"
         android:src="@drawable/game"
@@ -82,4 +40,62 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/llStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="5"
+            android:text="Start"
+            android:textColor="#9F7474"
+            android:textSize="30dp"
+            app:cornerRadius="20dp"
+            app:strokeColor="#9F7474"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/btBackGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="5"
+            android:text="Back"
+            android:textColor="#9F7474"
+            android:textSize="30dp"
+            app:cornerRadius="20dp"
+            app:strokeColor="#9F7474"
+            app:strokeWidth="2dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvThreeC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:shadowColor="#9F7474"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="1"
+        android:text="3"
+        android:textColor="#FFC107"
+        android:textSize="200dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">#9EBAC3</item>
+        <item name="android:windowBackground">@drawable/bg</item>
     </style>
-    
+
 </resources>

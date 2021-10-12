@@ -1,4 +1,4 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -15,18 +15,21 @@ import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.core.view.MenuItemCompat
+import java.util.*
 
 
-
-class MainActivity : AppCompatActivity() {
+class EditActivity : AppCompatActivity() {
     private lateinit var myRv: RecyclerView
     private lateinit var searchView:SearchView
     private lateinit var rvAdapter: RVAdapter
-    private lateinit var celebritybList: Celebrities
+    var celebritybList= Celebrities()
+    var celebrityFilteredbList=celebritybList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_edit)
+
+        getSupportActionBar()?.setTitle("Celebrities List")
+
         //declare UI elements in main activity
         val addButton = findViewById<Button>(R.id.btAddCel)
         val submitButton = findViewById<Button>(R.id.btSubmit)
@@ -59,9 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
         return cel
     }
-    private fun createApiInterface() {
+    fun createApiInterface() {
         //show progress Dialog
-        val progressDialog = ProgressDialog(this@MainActivity)
+        val progressDialog = ProgressDialog(this@EditActivity)
         progressDialog.setMessage("Please wait")
         progressDialog.show()
 
@@ -94,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         if(myRv.adapter==null)
         {
             //Log.d("checkdiff","declare my rv for the first time")
-            rvAdapter=RVAdapter(list,this@MainActivity)
+            rvAdapter=RVAdapter(list,this@EditActivity)
             myRv.adapter = rvAdapter
             myRv.layoutManager = LinearLayoutManager(applicationContext)
         }
@@ -107,8 +110,42 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+        val menuItem = menu?.findItem(R.id.action_search)
+        if(celebritybList!=null){
+
+        if (menuItem != null) {
+            val searchItem = menuItem.actionView as SearchView
+            searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText!!.isNotEmpty()) {
+                        celebrityFilteredbList.clear()
+                        val search = newText!!.toLowerCase(Locale.getDefault())
+                        celebritybList.forEach {
+                            if (it.name?.toLowerCase(Locale.getDefault()).toString()
+                                    .contains(search)
+                            ) {
+                                celebrityFilteredbList.add(it)
+                            }
+                        }
+                       // myRv.adapter!!.notifyDataSetChanged()
+                        rvAdapter.updateList(celebrityFilteredbList)
+                    } else {
+                        celebrityFilteredbList.clear()
+                        celebrityFilteredbList.addAll(celebritybList)
+                        rvAdapter.updateList(celebrityFilteredbList)
+                        //myRv.adapter!!.notifyDataSetChanged()
+                    }
+                    return true
+                }
+            })}
+        }
+        return true
+            }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

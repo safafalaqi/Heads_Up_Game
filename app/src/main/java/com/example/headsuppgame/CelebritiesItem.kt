@@ -1,4 +1,4 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 
 import kotlinx.serialization.SerialName
 import java.io.Serializable

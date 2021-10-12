@@ -1,4 +1,4 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -15,7 +15,7 @@ class AddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
-
+        getSupportActionBar()?.setTitle("Add A Celebrity")
         val name=findViewById<EditText>(R.id.etNameAddActiv)
         val taboo1=findViewById<EditText>(R.id.etTaboo1)
         val taboo2=findViewById<EditText>(R.id.etTaboo2)
@@ -29,7 +29,7 @@ class AddActivity : AppCompatActivity() {
 
         }
         back.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, EditActivity::class.java)
             startActivity(intent)
         }
     }

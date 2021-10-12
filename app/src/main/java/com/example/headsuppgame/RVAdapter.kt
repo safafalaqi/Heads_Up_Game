@@ -1,11 +1,11 @@
-package com.example.headsupprep
+package com.example.headsuppgame
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.headsupprep.databinding.ItemRowBinding
+import com.example.headsuppgame.databinding.ItemRowBinding
 
 class RVAdapter(private val celebrities: Celebrities ,val context:Context): RecyclerView.Adapter<RVAdapter.ItemViewHolder>(){
     class ItemViewHolder(val binding: ItemRowBinding): RecyclerView.ViewHolder(binding.root)
