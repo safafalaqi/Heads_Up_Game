@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HeadsUpPrep">
         <activity
+            android:name=".LocalDatabase"
+            android:exported="false" />
+        <activity
             android:name=".StartActivity"
             android:exported="false" />
         <activity

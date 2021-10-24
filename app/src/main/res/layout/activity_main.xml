@@ -47,7 +47,7 @@
             android:id="@+id/btStartGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+
             app:cornerRadius="20dp"
             android:textSize="20dp"
             app:strokeColor="#FFFFFF"
@@ -71,6 +71,19 @@
             android:shadowDy="4"
             android:shadowDx="4"
             android:text="Edit Celebrities list" />
+        <Button
+            android:id="@+id/btAddLocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="20dp"
+            android:textSize="20dp"
+            app:strokeColor="#FFFFFF"
+            app:strokeWidth="2dp"
+            android:shadowRadius="5"
+            android:textColor="#9F7474"
+            android:shadowDy="4"
+            android:shadowDx="4"
+            android:text="Add to Local database" />
     </LinearLayout>
 
 

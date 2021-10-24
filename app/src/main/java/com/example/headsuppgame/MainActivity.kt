@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         val btStart=findViewById<Button>(R.id.btStartGame)
         val btEdit=findViewById<Button>(R.id.btEditCel)
+        val btAdd=findViewById<Button>(R.id.btAddLocal)
+
 
         btStart.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
@@ -27,6 +29,13 @@ class MainActivity : AppCompatActivity() {
         btEdit.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
                 val intent = Intent(this@MainActivity, EditActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        btAdd.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch {
+                val intent = Intent(this@MainActivity, LocalDatabase::class.java)
                 startActivity(intent)
             }
         }
