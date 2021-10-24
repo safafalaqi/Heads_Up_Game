@@ -32,13 +32,22 @@ class LocalDatabase : AppCompatActivity() {
             tab2 = etTaboo2.text.toString()
             tab3 = etTaboo3.text.toString()
 
-            var database = HeadsUpDB(this)
-            var status = database.savedat(name, tab1, tab2, tab3)
-            Toast.makeText(
-                applicationContext,
-                "data saved successfully! " + status,
-                Toast.LENGTH_SHORT
-            ).show()
+
+
+            if(name.isNotEmpty()&&tab1.isNotEmpty()&&tab2.isNotEmpty()&&tab3.isNotEmpty()) {
+                var database = HeadsUpDB(this)
+                var status = database.savedata(name, tab1, tab2, tab3)
+                Toast.makeText(
+                    applicationContext,
+                    "data saved successfully! " + status,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }else
+                Toast.makeText(
+                    applicationContext,
+                    "Fields can not be empty! ",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
     }
 }
