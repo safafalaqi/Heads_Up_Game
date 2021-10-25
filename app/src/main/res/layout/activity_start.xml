@@ -79,6 +79,17 @@
             app:strokeColor="#9F7474"
             app:strokeWidth="2dp" />
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_bg"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_alignBottom="@id/btBackGame"/>
+
     </LinearLayout>
 
     <TextView

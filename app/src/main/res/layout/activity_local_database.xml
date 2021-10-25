@@ -7,42 +7,46 @@
     tools:context=".LocalDatabase">
 
     <LinearLayout
+        android:id="@+id/llTopData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etDBName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Name" />
+            android:hint="Name"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etDBtaboo1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Taboo 1" />
+            android:hint="Taboo 1"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etDBtaboo2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Taboo 2" />
+            android:hint="Taboo 2"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/etDBtaboo3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Taboo 3" />
+            android:hint="Taboo 3"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/btDBAdd"
@@ -50,4 +54,14 @@
             android:layout_height="wrap_content"
             android:text="Add" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCElDatabase"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTopData" />
 </androidx.constraintlayout.widget.ConstraintLayout>

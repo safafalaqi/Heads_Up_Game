@@ -4,9 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.util.Log
+import android.widget.*
 import androidx.core.view.isVisible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +22,17 @@ class StartActivity : AppCompatActivity() {
         val start = findViewById<Button>(R.id.btStart)
         val back = findViewById<Button>(R.id.btBackGame)
 
-        start.setOnClickListener {
+        //user decide from where we get data either API or Database
+        val dataResources = resources.getStringArray(R.array.DataResources)
+        val spinner = findViewById<Spinner>(R.id.spinner)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item, dataResources  )
+            spinner.adapter = adapter
+        }
+
+            start.setOnClickListener {
             setVisibility(true,false)
             object : CountDownTimer(4000, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
@@ -33,6 +42,7 @@ class StartActivity : AppCompatActivity() {
                 override fun onFinish() {
                     CoroutineScope(Dispatchers.IO).launch {
                         val intent = Intent(this@StartActivity, GameActivity::class.java)
+                        intent.putExtra("dataSource",spinner.selectedItem.toString())
                         startActivity(intent)
                     }
                 }

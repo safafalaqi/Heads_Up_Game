@@ -14,9 +14,11 @@
         android:theme="@style/Theme.HeadsUpPrep">
         <activity
             android:name=".LocalDatabase"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".StartActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".GameActivity"
@@ -25,6 +27,7 @@
             android:screenOrientation="fullSensor" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,12 +37,15 @@
         </activity>
         <activity
             android:name=".UpdateDeleteActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".AddActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".EditActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
     </application>
 

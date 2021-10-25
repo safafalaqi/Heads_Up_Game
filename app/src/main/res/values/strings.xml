@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Heads Up Game</string>
+
+    <string-array name="DataResources">
+        <item>from API</item>
+        <item>from Local Database</item>
+    </string-array>
 </resources>

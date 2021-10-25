@@ -5,8 +5,10 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.widget.*
 import androidx.core.view.isVisible
+import com.example.headsuppgame.database.HeadsUpDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -18,8 +20,9 @@ import java.net.URL
 
 
 class GameActivity : AppCompatActivity() {
-    lateinit var celebrities:Celebrities
+    var celebrities = Celebrities()
     lateinit var celebrity:CelebritiesItem
+    private val databaseHelper by lazy{ HeadsUpDB(applicationContext) }
 
     var counter=0
     var startGame=false
@@ -34,12 +37,18 @@ class GameActivity : AppCompatActivity() {
         //hide actionbar
         supportActionBar?.hide()
 
-        val start=findViewById<Button>(R.id.btStart)
-        val back=findViewById<Button>(R.id.btBackGame)
-        //we get call api
-        createApiInterface()
+        when(intent.getStringExtra("dataSource")) {
+            "from API"-> createApiInterface()
+            "from Local Database"-> dataFromDatabase()
+        }
 
     }
+
+    private fun dataFromDatabase() {
+        celebrities.clear()
+        celebrities=databaseHelper.readData()
+    }
+
     //to control orientation
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
@@ -103,6 +112,7 @@ class GameActivity : AppCompatActivity() {
                 call: Call<Celebrities?>?,
                 response: Response<Celebrities?>
             ) {
+                celebrities.clear()
                 celebrities=response.body()!!
 
             }
@@ -113,4 +123,8 @@ class GameActivity : AppCompatActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@GameActivity, MainActivity::class.java))
+    }
 }
