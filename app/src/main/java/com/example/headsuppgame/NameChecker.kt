@@ -1,6 +1,7 @@
 package com.example.headsuppgame
 
 import android.util.Log
+import com.example.headsuppgame.model.CelebritiesItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -8,7 +9,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.net.URL
 
-class NameChecker(val cel:CelebritiesItem ) {
+class NameChecker(val cel: CelebritiesItem) {
 
         //https://check-name.herokuapp.com/verify I used this api to check if the name is a real person name
          fun checkData():Int {

@@ -1,4 +1,6 @@
 package com.example.headsuppgame
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.model.CelebritiesItem
 import retrofit2.Call
 import retrofit2.http.*
 

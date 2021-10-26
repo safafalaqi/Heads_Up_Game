@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.headsuppgame.database.HeadsUpDB
+import com.example.headsuppgame.model.CelebritiesItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,42 +27,81 @@ class UpdateDeleteActivity : AppCompatActivity() {
     lateinit var update:Button
     lateinit var back:Button
 
-    lateinit var celebrity:CelebritiesItem
+    lateinit var celebrity: CelebritiesItem
+    var editkey=4
+
+    private val databaseHelper by lazy{ HeadsUpDB(applicationContext) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_delete)
 
         getSupportActionBar()?.setTitle("Update and delete Celebrity")
-        name=findViewById(R.id.etName)
-        taboo1=findViewById(R.id.etTaboo1UD)
-        taboo2=findViewById(R.id.etTaboo2UD)
-        taboo3=findViewById(R.id.etTaboo3UD)
-        delete=findViewById(R.id.btDelCelActiv)
-        update=findViewById(R.id.btUpCelActiv)
-        back=findViewById(R.id.btBackUD)
+        name = findViewById(R.id.etName)
+        taboo1 = findViewById(R.id.etTaboo1UD)
+        taboo2 = findViewById(R.id.etTaboo2UD)
+        taboo3 = findViewById(R.id.etTaboo3UD)
+        delete = findViewById(R.id.btDelCelActiv)
+        update = findViewById(R.id.btUpCelActiv)
+        back = findViewById(R.id.btBackUD)
 
         //get data from previous activity
         if (intent.extras != null) {
             celebrity = intent.getSerializableExtra("celebrity") as CelebritiesItem
+            //here to decide which method used based on data
+            editkey = intent.getIntExtra("editkey", 3)
         }
+
 
         name.setText(celebrity.name)
         taboo1.setText(celebrity.taboo1)
         taboo2.setText(celebrity.taboo2)
         taboo3.setText(celebrity.taboo3)
 
-        update.setOnClickListener{
-            //get user name and taboos
-           updateCelebrity(celebrity.pk,name.text.toString(),taboo1.text.toString(),taboo2.text.toString(),taboo3.text.toString())
+        update.setOnClickListener {
+            if (editkey == 0) {
+                //get user name and taboos
+                updateCelebrity(
+                    celebrity.pk,
+                    name.text.toString(),
+                    taboo1.text.toString(),
+                    taboo2.text.toString(),
+                    taboo3.text.toString()
+                )
+            } else if (editkey == 1) {
+                updateDatabase(
+                    celebrity.pk,
+                    name.text.toString(),
+                    taboo1.text.toString(),
+                    taboo2.text.toString(),
+                    taboo3.text.toString()
+                )
+            }
         }
-        delete.setOnClickListener{
-            alertDialog()
+        delete.setOnClickListener {
+            alertDialog(editkey)
         }
 
-        back.setOnClickListener{
-            val intent = Intent(this, EditActivity::class.java)
-            startActivity(intent)
+        back.setOnClickListener {
+            if (editkey == 0) {
+                val intent = Intent(this, EditActivity::class.java)
+                startActivity(intent)
+            } else if(editkey == 1){
+                val intent = Intent(this, LocalDatabase::class.java)
+                startActivity(intent)
+            }
         }
+    }
+
+    private fun updateDatabase(id: Int?,
+                               name: String,
+                               taboo1: String,
+                               taboo2: String,
+                               taboo3: String) {
+        databaseHelper.updateData(id!!,name,taboo1,taboo2,taboo3)
+    }
+    private fun deleteDatabase(celebrity: CelebritiesItem) {
+        databaseHelper.deleteData(celebrity)
     }
 
 
@@ -79,7 +120,9 @@ class UpdateDeleteActivity : AppCompatActivity() {
         if (name.isNotEmpty() && taboo1.isNotEmpty()&&taboo2.isNotEmpty()&&taboo3.isNotEmpty()) {
             val apiInterface = APIClient().getClient()?.create(APIInterface::class.java)
             if (id != null) {
-                apiInterface!!.updateUsersInfo(id.toInt(),CelebritiesItem(name, taboo1,taboo2,taboo3)).enqueue(object :
+                apiInterface!!.updateUsersInfo(id.toInt(),
+                    CelebritiesItem(name, taboo1,taboo2,taboo3)
+                ).enqueue(object :
                     Callback<CelebritiesItem?> {
                     override fun onResponse(
                         call: Call<CelebritiesItem?>?,
@@ -137,7 +180,7 @@ class UpdateDeleteActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    fun alertDialog(){
+    fun alertDialog(editkey: Int) {
 
         // first we create a variable to hold an AlertDialog builder
         val dialogBuilder = AlertDialog.Builder(this)
@@ -145,7 +188,10 @@ class UpdateDeleteActivity : AppCompatActivity() {
         dialogBuilder.setMessage("Are you sure you want to delete this celebrity?")
         dialogBuilder.setPositiveButton("Yes", DialogInterface.OnClickListener {
                     dialog, id ->
+            if(editkey==0)
             deleteCelebrity(celebrity)
+            else if(editkey==1)
+            deleteDatabase(celebrity)
             })
             // negative button text and action
             .setNegativeButton("Cancel", DialogInterface.OnClickListener {

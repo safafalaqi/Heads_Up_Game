@@ -5,14 +5,16 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.headsuppgame.Celebrities
-import com.example.headsuppgame.CelebritiesItem
+import android.widget.Toast
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.model.CelebritiesItem
+import java.lang.Exception
 
-class HeadsUpDB (context: Context): SQLiteOpenHelper(context,"celebrities.db",null,1) {
+class HeadsUpDB (val context: Context): SQLiteOpenHelper(context,"celebrities.db",null,1) {
     var sqLiteDatabase: SQLiteDatabase = writableDatabase
     override fun onCreate(db: SQLiteDatabase?) {
         if(db!=null){
-            db.execSQL("create table celebrities (_id integer primary key autoincrement,Name text, Taboo1 text, Taboo2 text, Taboo3 text)")
+            db.execSQL("CREATE TABLE celebrities (_id integer PRIMARY KEY autoincrement,Name text, Taboo1 text, Taboo2 text, Taboo3 text)")
         }
     }
 
@@ -30,7 +32,7 @@ class HeadsUpDB (context: Context): SQLiteOpenHelper(context,"celebrities.db",nu
         return sqLiteDatabase.insert("celebrities", null, celeb)
     }
 
-    fun readData(): Celebrities{
+    fun readData(): Celebrities {
         val cList= Celebrities()
         val cursor: Cursor = sqLiteDatabase.rawQuery("SELECT * FROM celebrities",null)
 
@@ -50,5 +52,32 @@ class HeadsUpDB (context: Context): SQLiteOpenHelper(context,"celebrities.db",nu
             }
         }
         return cList
+    }
+
+    fun updateData(pk: Int, name: String,taboo1:String,taboo2:String,taboo3:String){
+
+        try {
+            val cv=ContentValues()
+            cv.put("Name",name)
+            cv.put("Taboo1",taboo1)
+            cv.put("Taboo2",taboo2)
+            cv.put("Taboo3",taboo3)
+            var status= sqLiteDatabase.update("celebrities",cv,"_id = $pk",null)
+            Toast.makeText(context, "Update success! $status", Toast.LENGTH_SHORT)
+                .show()
+
+        }catch (e: Exception){
+            Toast.makeText(context,"Can not Update! ",  Toast.LENGTH_SHORT  ).show()
+
+        }
+    }
+
+    fun deleteData(celebrity: CelebritiesItem) {
+        try {
+            sqLiteDatabase.delete("celebrities","_id = ${celebrity.pk}",null)
+            Toast.makeText(context,"Delete success! ",  Toast.LENGTH_SHORT  ).show()
+        }catch (e: Exception){
+            Toast.makeText(context,"Can not delete! ",  Toast.LENGTH_SHORT  ).show()
+        }
     }
 }

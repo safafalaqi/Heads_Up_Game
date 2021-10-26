@@ -1,4 +1,4 @@
-package com.example.headsuppgame
+package com.example.headsuppgame.model
 
 
 class Celebrities : ArrayList<CelebritiesItem>()

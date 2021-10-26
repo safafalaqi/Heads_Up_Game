@@ -1,16 +1,19 @@
-package com.example.headsuppgame
+package com.example.headsuppgame.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.UpdateDeleteActivity
 import com.example.headsuppgame.databinding.ItemRowBinding
 
-class RVAdapter(private val celebrities: Celebrities ,val context:Context): RecyclerView.Adapter<RVAdapter.ItemViewHolder>(){
+//edit key if 0 it means the data will be edit from api and if 1 it means from local database
+class RVAdapter(private val celebrities: Celebrities, val context:Context, val editKey:Int): RecyclerView.Adapter<RVAdapter.ItemViewHolder>(){
     class ItemViewHolder(val binding: ItemRowBinding): RecyclerView.ViewHolder(binding.root)
 
-    var filterdCelebrities:Celebrities
+    var filterdCelebrities: Celebrities
     init {
         filterdCelebrities = celebrities as Celebrities
     }
@@ -36,12 +39,14 @@ class RVAdapter(private val celebrities: Celebrities ,val context:Context): Recy
         }
         holder.binding.btimgdel.setOnClickListener{
             val intent = Intent(context, UpdateDeleteActivity::class.java)
-                intent.putExtra("celebrity",celebrities[position])
+                intent.putExtra("celebrity", celebrities[position])
+                intent.putExtra("editkey", editKey)
                 context.startActivity(intent)
         }
         holder.binding.btimgupdate.setOnClickListener{
             val intent = Intent(context, UpdateDeleteActivity::class.java)
             intent.putExtra("celebrity",celebrities[position])
+            intent.putExtra("editkey", editKey)
             context.startActivity(intent)
         }
 

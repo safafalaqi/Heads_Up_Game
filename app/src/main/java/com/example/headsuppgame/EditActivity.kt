@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -13,16 +12,12 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.internal.wait
-import org.json.JSONObject
+import com.example.headsuppgame.adapter.RVAdapter
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.model.CelebritiesItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.URL
 import java.util.*
 
 
@@ -51,7 +46,7 @@ class EditActivity : AppCompatActivity() {
         }
         submitButton.setOnClickListener{
             val intent = Intent(this, UpdateDeleteActivity::class.java)
-            val celebrity:CelebritiesItem?=searchCelebrities(name.text.toString())
+            val celebrity: CelebritiesItem?=searchCelebrities(name.text.toString())
             if(celebrity!=null){
             intent.putExtra("celebrity",celebrity)
             startActivity(intent)
@@ -63,8 +58,8 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-     fun searchCelebrities(name:String):CelebritiesItem? {
-        var cel:CelebritiesItem?=null
+    fun searchCelebrities(name:String): CelebritiesItem? {
+        var cel: CelebritiesItem?=null
         for (i in 0 until celebritybList.size) {
             if (celebritybList[i].name == name) {
                 return celebritybList[i]
@@ -103,11 +98,11 @@ class EditActivity : AppCompatActivity() {
             }
         })
     }
-    fun declareMyRv(list:Celebrities) {
+    fun declareMyRv(list: Celebrities) {
         if(myRv.adapter==null)
         {
             //Log.d("checkdiff","declare my rv for the first time")
-            rvAdapter=RVAdapter(list,this@EditActivity)
+            rvAdapter= RVAdapter(list,this@EditActivity,0)
             myRv.adapter = rvAdapter
             myRv.layoutManager = LinearLayoutManager(applicationContext)
         }
@@ -156,7 +151,6 @@ class EditActivity : AppCompatActivity() {
         return true
             }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
             R.id.refresh.apply{
@@ -165,41 +159,4 @@ class EditActivity : AppCompatActivity() {
             }
         return super.onOptionsItemSelected(item)
     }
-    /*
-    fun  filterList(){
-    val celFiltered=celebritybList
-
-    if (celebritybList != null)
-    {
-        celFiltered.clear()
-        for (i in celebritybList) {
-            var score = filterByName(i.name!!)
-            if (score == 0) {
-            } else
-                celFiltered.add(i)
-        }
-        rvAdapter.updateList(celFiltered)
-    }
-    }*/
-/*
-    fun filterByName(name:String):Int {
-        var score = 0
-        CoroutineScope(Dispatchers.IO).launch {
-            var data = ""
-            try {
-                data = URL("https://check-name.herokuapp.com/verify/$name/")
-                    .readText(Charsets.UTF_8)
-                Log.d("KeYCheck", "here in get data to check name  ")
-            } catch (e: Exception) {
-                println("Error: $e")
-            }
-            val jsonObj = JSONObject(data)
-            score = jsonObj.getInt("score")
-            Log.d("KeYCheck", "here in get in check name and the score is $score  ")
-        }.wait()
-        return score
-
-    }*/
-
-
 }

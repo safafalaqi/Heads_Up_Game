@@ -7,8 +7,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
+import com.example.headsuppgame.adapter.RVAdapter
 import com.example.headsuppgame.database.HeadsUpDB
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.model.CelebritiesItem
 
 class LocalDatabase : AppCompatActivity() {
     private lateinit var myRV: RecyclerView
@@ -19,7 +21,7 @@ class LocalDatabase : AppCompatActivity() {
     lateinit var etTaboo3: EditText
     lateinit var btAdd: Button
 
-    lateinit var celebrities:Celebrities
+    lateinit var celebrities: Celebrities
 
     var name= ""
     var tab1= ""
@@ -28,6 +30,12 @@ class LocalDatabase : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_local_database)
+
+
+        if(HeadsUpDB(this).readData()!=null){
+            celebrities=HeadsUpDB(this).readData()
+            setRV()
+        }
 
            etName = findViewById(R.id.etDBName)
            etTaboo1 = findViewById(R.id.etDBtaboo1)
@@ -63,7 +71,7 @@ class LocalDatabase : AppCompatActivity() {
     }
     private fun setRV() {
         myRV=findViewById(R.id.rvCElDatabase)
-        rvAdapter =RVAdapter(celebrities,this)
+        rvAdapter = RVAdapter(celebrities,this,1)
         myRV.adapter = rvAdapter
         myRV.layoutManager = LinearLayoutManager(applicationContext)
     }

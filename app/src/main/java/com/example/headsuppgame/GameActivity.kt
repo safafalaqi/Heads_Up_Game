@@ -5,23 +5,19 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.headsuppgame.database.HeadsUpDB
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.example.headsuppgame.model.Celebrities
+import com.example.headsuppgame.model.CelebritiesItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.URL
 
 
 class GameActivity : AppCompatActivity() {
     var celebrities = Celebrities()
-    lateinit var celebrity:CelebritiesItem
+    lateinit var celebrity: CelebritiesItem
     private val databaseHelper by lazy{ HeadsUpDB(applicationContext) }
 
     var counter=0

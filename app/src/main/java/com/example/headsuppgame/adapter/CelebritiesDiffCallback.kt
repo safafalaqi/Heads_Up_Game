@@ -1,9 +1,10 @@
-package com.example.headsuppgame
+package com.example.headsuppgame.adapter
 
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
+import com.example.headsuppgame.model.Celebrities
 
-class CelebritiesDiffCallback (private val oldList:Celebrities, private val newList: Celebrities) : DiffUtil.Callback() {
+class CelebritiesDiffCallback (private val oldList: Celebrities, private val newList: Celebrities) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
